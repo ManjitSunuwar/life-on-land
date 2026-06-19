@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Life on Land System</title>
+
+  <style>
+    body { margin:0; font-family: Arial; background:#f4f6f9; }
+
+    .sidebar {
+      width:240px;
+      height:100vh;
+      background:#2c3e50;
+      position:fixed;
+      color:white;
+      padding-top:20px;
+    }
+
+    .sidebar h2 { text-align:center; }
+
+    .sidebar div {
+      padding:16px;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    .sidebar div:hover, .active {
+      background:#1abc9c;
+    }
+
+    .content {
+      margin-left:240px;
+      padding:30px;
+    }
+
+    .section { display:none; }
+
+    button {
+      padding:12px 20px;
+      background:#148f2f;
+      color:white;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+    }
+
+    table {
+      width:100%;
+      border-collapse:collapse;
+      margin-top:20px;
+    }
+
+    th {
+      background:#0a7d02;
+      color:white;
+      padding:14px;
+    }
+
+    td {
+      padding:12px;
+      text-align:center;
+    }
+
+    tr:nth-child(even){ background:#f2f2f2; }
+
+    p { line-height:1.7; font-size:15px; }
+  </style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <h2>🌍 Life on Land</h2>
+
+  <div onclick="show('home',this)" class="active">🏠 Home</div>
+  <div onclick="show('about',this)">📖 About Project</div>
+  <div onclick="show('life',this)">🌱 Life on Land</div>
+  <div onclick="show('data',this)">📊 Production Data</div>
+  <div onclick="show('conclusion',this)">📘 Conclusion</div>
+</div>
+
+<div class="content">
+
+  <!-- HOME -->
+  <div id="home" class="section">
+    <h1>🌾 Crop Production Management System</h1>
+
+    <p>
+      This Crop Production Management System has been developed under the "Life on Land" theme,
+      which focuses on sustainable use of terrestrial ecosystems. The system provides structured
+      agricultural data related to crop production, allowing users to explore trends across
+      different provinces and years.
+    </p>
+
+    <p>
+      Agriculture plays a vital role in both economic development and environmental sustainability.
+      By studying crop production patterns, we can understand how land resources are being utilized
+      and how farming practices impact ecosystems. This system helps in analyzing such data and
+      supports better decision-making for sustainable agriculture.
+    </p>
+
+    <p>
+      The project demonstrates how technology can be applied to manage agricultural information.
+      It combines concepts of database systems, data analysis, and web development to present
+      meaningful insights in an accessible format.
+    </p>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about" class="section">
+    <h1>📖 About the Project</h1>
+
+    <p>
+      This project focuses on the analysis and management of crop production data, specifically
+      for wheat and rice. The system stores and displays agricultural data including production,
+      area, and yield across different provinces and years.
+    </p>
+
+    <p>
+      The goal of this project is to demonstrate how a structured system can be built to manage
+      and analyze agricultural datasets. By organizing production data efficiently, users can
+      observe trends and compare productivity between regions.
+    </p>
+
+    <p>
+      This system is developed using web technologies along with database concepts, making it
+      a complete full-stack application. It highlights how digital solutions can support
+      agricultural planning and decision-making.
+    </p>
+  </div>
+
+  <!-- LIFE ON LAND -->
+  <div id="life" class="section">
+    <h1>🌱 Life on Land</h1>
+
+    <p>
+      "Life on Land" is one of the United Nations Sustainable Development Goals (SDG 15),
+      which focuses on protecting, restoring, and promoting the sustainable use of terrestrial
+      ecosystems. It aims to address issues such as deforestation, soil degradation, and loss
+      of biodiversity.
+    </p>
+
+    <p>
+      Agricultural activities are closely linked to land sustainability. Poor farming practices
+      can lead to soil erosion and environmental damage, while sustainable practices can help
+      preserve natural resources and improve productivity.
+    </p>
+
+    <p>
+      This system contributes to the Life on Land theme by providing accessible agricultural
+      data that helps users understand the importance of sustainable land use and responsible
+      farming practices.
+    </p>
+  </div>
+
+  <!-- DATA -->
+  <div id="data" class="section">
+    <h1>📊 Production Data</h1>
+
+    <p>
+      This section provides detailed crop production data for wheat and rice across different
+      provinces and years. It includes important metrics such as cultivated area, total production,
+      and yield per hectare.
+    </p>
+
+    <p>
+      By analyzing this data, users can compare agricultural performance across regions and identify
+      patterns in crop productivity. This information is essential for improving agricultural
+      practices and ensuring efficient use of land resources.
+    </p>
+
+    <button onclick="loadData()">Load Data</button>
+
+    <div id="output"></div>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div id="conclusion" class="section">
+    <h1>📘 Conclusion</h1>
+
+    <p>
+      This project demonstrates how agricultural data can be effectively managed and analyzed using
+      modern technology. By integrating data visualization with structured information, the system
+      provides valuable insights into crop production.
+    </p>
+
+    <p>
+      The analysis of crop production trends helps in understanding regional differences and supports
+      better planning for sustainable agriculture. It highlights the importance of data-driven
+      decision-making in enhancing productivity and protecting land resources.
+    </p>
+
+    <p>
+      Overall, the system aligns with the Life on Land theme by promoting awareness about sustainable
+      land use and the role of agriculture in environmental conservation.
+    </p>
+  </div>
+
+</div>
+
+<script>
+
+  function show(id, el){
+    document.querySelectorAll(".section").forEach(sec => sec.style.display="none");
+    document.querySelectorAll(".sidebar div").forEach(d=>d.classList.remove("active"));
+
+    document.getElementById(id).style.display="block";
+    el.classList.add("active");
+  }
+
+  function loadData(){
+
+  let table = `
+  <table>
+  <tr>
+  <th>Crop</th>
+  <th>Province</th>
+  <th>Year</th>
+  <th>Area (Ha)</th>
+  <th>Production (MT)</th>
+  <th>Yield (MT/Ha)</th>
+  </tr>
+
+  <tr><td>Wheat</td><td>Lumbini</td><td>2019</td><td>496000</td><td>1049000</td><td>2.11</td></tr>
+  <tr><td>Wheat</td><td>Lumbini</td><td>2020</td><td>500000</td><td>1060000</td><td>2.12</td></tr>
+  <tr><td>Wheat</td><td>Lumbini</td><td>2021</td><td>505000</td><td>1080000</td><td>2.14</td></tr>
+  <tr><td>Wheat</td><td>Lumbini</td><td>2022</td><td>510000</td><td>1100000</td><td>2.16</td></tr>
+  <tr><td>Wheat</td><td>Lumbini</td><td>2023</td><td>515000</td><td>1120000</td><td>2.17</td></tr>
+
+  <tr><td>Wheat</td><td>Madesh Province</td><td>2019</td><td>240000</td><td>800000</td><td>3.3</td></tr>
+  <tr><td>Wheat</td><td>Madesh Province</td><td>2020</td><td>245000</td><td>810000</td><td>3.31</td></tr>
+  <tr><td>Wheat</td><td>Madesh Province</td><td>2021</td><td>250000</td><td>825000</td><td>3.3</td></tr>
+  <tr><td>Wheat</td><td>Madesh Province</td><td>2022</td><td>255000</td><td>840000</td><td>3.29</td></tr>
+  <tr><td>Wheat</td><td>Madesh Province</td><td>2023</td><td>260000</td><td>855000</td><td>3.29</td></tr>
+
+  <tr><td>Wheat</td><td>Sudurpashchim</td><td>2019</td><td>320000</td><td>547000</td><td>1.71</td></tr>
+  <tr><td>Wheat</td><td>Sudurpashchim</td><td>2020</td><td>322000</td><td>550000</td><td>1.71</td></tr>
+  <tr><td>Wheat</td><td>Sudurpashchim</td><td>2021</td><td>325000</td><td>560000</td><td>1.72</td></tr>
+  <tr><td>Wheat</td><td>Sudurpashchim</td><td>2022</td><td>328000</td><td>570000</td><td>1.73</td></tr>
+  <tr><td>Wheat</td><td>Sudurpashchim</td><td>2023</td><td>330000</td><td>580000</td><td>1.75</td></tr>
+
+  <tr><td>Rice</td><td>Lumbini</td><td>2019</td><td>305000</td><td>1250000</td><td>4.1</td></tr>
+  <tr><td>Rice</td><td>Lumbini</td><td>2020</td><td>308000</td><td>1275000</td><td>4.14</td></tr>
+  <tr><td>Rice</td><td>Lumbini</td><td>2021</td><td>310000</td><td>1290000</td><td>4.16</td></tr>
+  <tr><td>Rice</td><td>Lumbini</td><td>2022</td><td>312000</td><td>1310000</td><td>4.2</td></tr>
+  <tr><td>Rice</td><td>Lumbini</td><td>2023</td><td>315000</td><td>1330000</td><td>4.22</td></tr>
+
+  <tr><td>Rice</td><td>Madesh Province</td><td>2019</td><td>350000</td><td>1450000</td><td>4.14</td></tr>
+  <tr><td>Rice</td><td>Madesh Province</td><td>2020</td><td>353000</td><td>1470000</td><td>4.16</td></tr>
+  <tr><td>Rice</td><td>Madesh Province</td><td>2021</td><td>355000</td><td>1490000</td><td>4.2</td></tr>
+  <tr><td>Rice</td><td>Madesh Province</td><td>2022</td><td>358000</td><td>1510000</td><td>4.22</td></tr>
+  <tr><td>Rice</td><td>Madesh Province</td><td>2023</td><td>360000</td><td>1530000</td><td>4.25</td></tr>
+
+  <tr><td>Rice</td><td>Sudurpashchim</td><td>2019</td><td>180000</td><td>720000</td><td>4</td></tr>
+  <tr><td>Rice</td><td>Sudurpashchim</td><td>2020</td><td>182000</td><td>730000</td><td>4.01</td></tr>
+  <tr><td>Rice</td><td>Sudurpashchim</td><td>2021</td><td>185000</td><td>742000</td><td>4.01</td></tr>
+  <tr><td>Rice</td><td>Sudurpashchim</td><td>2022</td><td>188000</td><td>755000</td><td>4.02</td></tr>
+  <tr><td>Rice</td><td>Sudurpashchim</td><td>2023</td><td>189000</td><td>770000</td><td>4.05</td></tr>
+
+  </table>
+  `;
+
+  document.getElementById("output").innerHTML = table;
+  }
+
+  window.onload = function(){
+    document.getElementById("home").style.display="block";
+  }
+
+</script>
+
+</body>
+</html>
