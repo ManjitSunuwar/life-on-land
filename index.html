@@ -1,273 +1,708 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Life on Land System</title>
-
-  <style>
-    body { margin:0; font-family: Arial; background:#f4f6f9; }
-
-    .sidebar {
-      width:240px;
-      height:100vh;
-      background:#2c3e50;
-      position:fixed;
-      color:white;
-      padding-top:20px;
-    }
-
-    .sidebar h2 { text-align:center; }
-
-    .sidebar div {
-      padding:16px;
-      cursor:pointer;
-      font-size:16px;
-    }
-
-    .sidebar div:hover, .active {
-      background:#1abc9c;
-    }
-
-    .content {
-      margin-left:240px;
-      padding:30px;
-    }
-
-    .section { display:none; }
-
-    button {
-      padding:12px 20px;
-      background:#148f2f;
-      color:white;
-      border:none;
-      border-radius:6px;
-      cursor:pointer;
-    }
-
-    table {
-      width:100%;
-      border-collapse:collapse;
-      margin-top:20px;
-    }
-
-    th {
-      background:#0a7d02;
-      color:white;
-      padding:14px;
-    }
-
-    td {
-      padding:12px;
-      text-align:center;
-    }
-
-    tr:nth-child(even){ background:#f2f2f2; }
-
-    p { line-height:1.7; font-size:15px; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life on Land – DBSN-S2026</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
 
-<div class="sidebar">
-  <h2>🌍 Life on Land</h2>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 2c-2.8 2.8-4 6-4 10s1.2 7.2 4 10"/><path d="M12 2c2.8 2.8 4 6 4 10s-1.2 7.2-4 10"/><path d="M2 12h20"/></svg>
+        Life on Land
+      </div>
+      <div class="nav-links">
+        <a class="nav-link active" onclick="showPage('home', this)">Home</a>
+        <a class="nav-link" onclick="showPage('about', this)">About the Project</a>
+        <a class="nav-link" onclick="showPage('data', this)">Production Data</a>
+        <a class="nav-link" onclick="showPage('conclusion', this)">Conclusion</a>
+      </div>
+      <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a class="nav-link active" onclick="showPage('home', this); toggleMenu()">Home</a>
+      <a class="nav-link" onclick="showPage('about', this); toggleMenu()">About the Project</a>
+      <a class="nav-link" onclick="showPage('data', this); toggleMenu()">Production Data</a>
+      <a class="nav-link" onclick="showPage('conclusion', this); toggleMenu()">Conclusion</a>
+    </div>
+  </nav>
 
-  <div onclick="show('home',this)" class="active">🏠 Home</div>
-  <div onclick="show('about',this)">📖 About Project</div>
-  <div onclick="show('life',this)">🌱 Life on Land</div>
-  <div onclick="show('data',this)">📊 Production Data</div>
-  <div onclick="show('conclusion',this)">📘 Conclusion</div>
-</div>
+  <!-- HOME PAGE -->
+  <div id="page-home" class="page active">
+    <section class="hero">
+      <div class="hero-badge">
+        <span>&#127807;</span> DBSN-S2026 &mdash; Database Design Project
+      </div>
+      <h1>Life on Land</h1>
+      <p class="hero-sub">Crop Production Analysis in Nepal's Three Provinces</p>
+      <p class="hero-desc">
+        This project analyzes wheat and rice crop production data across
+        Lumbini, Madesh Province, and Sudurpashchim from 2019 to 2023,
+        applying relational database design to uncover agricultural trends.
+      </p>
+      <button class="btn-primary" onclick="showPage('data', null)">View Production Data &rarr;</button>
+    </section>
 
-<div class="content">
+    <section class="stats-strip">
+      <div class="stat-card">
+        <span class="stat-val">3</span>
+        <span class="stat-label">Provinces Covered</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-val">2</span>
+        <span class="stat-label">Crops Analyzed</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-val">5</span>
+        <span class="stat-label">Years (2019–2023)</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-val">30</span>
+        <span class="stat-label">Data Records</span>
+      </div>
+    </section>
 
-  <!-- HOME -->
-  <div id="home" class="section">
-    <h1>🌾 Crop Production Management System</h1>
+    <section class="section bg-alt">
+      <div class="container">
+        <h2 class="section-title">Explore the Project</h2>
+        <p class="section-sub">Navigate through the sections to learn more about this study</p>
+        <div class="card-grid">
+          <div class="nav-card" onclick="showPage('about', null)">
+            <div class="card-icon">&#128196;</div>
+            <h3>About the Project</h3>
+            <p>Learn about DBSN-S2026 — its objectives, geographic scope, and database approach to agricultural data management.</p>
+            <span class="card-link">View Details &rarr;</span>
+          </div>
+          <div class="nav-card" onclick="showPage('data', null)">
+            <div class="card-icon">&#128202;</div>
+            <h3>Production Data</h3>
+            <p>Explore interactive bar charts comparing wheat and rice production across provinces from 2019 to 2023.</p>
+            <span class="card-link">Explore Data &rarr;</span>
+          </div>
+          <div class="nav-card" onclick="showPage('conclusion', null)">
+            <div class="card-icon">&#128221;</div>
+            <h3>Conclusion</h3>
+            <p>Discover key findings, provincial comparisons, and recommendations drawn from five years of crop data.</p>
+            <span class="card-link">Read Conclusion &rarr;</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <p>
-      This Crop Production Management System has been developed under the "Life on Land" theme,
-      which focuses on sustainable use of terrestrial ecosystems. The system provides structured
-      agricultural data related to crop production, allowing users to explore trends across
-      different provinces and years.
-    </p>
-
-    <p>
-      Agriculture plays a vital role in both economic development and environmental sustainability.
-      By studying crop production patterns, we can understand how land resources are being utilized
-      and how farming practices impact ecosystems. This system helps in analyzing such data and
-      supports better decision-making for sustainable agriculture.
-    </p>
-
-    <p>
-      The project demonstrates how technology can be applied to manage agricultural information.
-      It combines concepts of database systems, data analysis, and web development to present
-      meaningful insights in an accessible format.
-    </p>
+    <section class="section">
+      <div class="container narrow">
+        <h2 class="section-title">About the Topic</h2>
+        <p class="body-text">
+          Agriculture is the backbone of Nepal's economy, supporting the livelihoods
+          of over 60% of the population. Wheat and rice are the two most critical
+          staple crops produced across diverse ecological zones.
+        </p>
+        <p class="body-text">
+          This project examines how crop production has evolved over five years in
+          three provinces — analyzing area harvested, total production in metric tons,
+          and yield efficiency — to provide data-driven insights into agricultural
+          performance and long-term sustainability.
+        </p>
+      </div>
+    </section>
   </div>
 
-  <!-- ABOUT -->
-  <div id="about" class="section">
-    <h1>📖 About the Project</h1>
+  <!-- ABOUT PAGE -->
+  <div id="page-about" class="page">
+    <section class="hero small-hero">
+      <div class="hero-badge">&#128196; DBSN-S2026</div>
+      <h1>About the Project</h1>
+      <p class="hero-sub">A structured database design study of Nepal's agricultural crop production</p>
+    </section>
 
-    <p>
-      This project focuses on the analysis and management of crop production data, specifically
-      for wheat and rice. The system stores and displays agricultural data including production,
-      area, and yield across different provinces and years.
-    </p>
+    <section class="section">
+      <div class="container">
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-icon">&#128197;</div>
+            <h4>Study Period</h4>
+            <p>2019 &ndash; 2023 (5 years of annual crop production records)</p>
+          </div>
+          <div class="info-card">
+            <div class="info-icon">&#128205;</div>
+            <h4>Geographic Scope</h4>
+            <p>Three provinces of Nepal: Lumbini, Madesh Province, and Sudurpashchim</p>
+          </div>
+          <div class="info-card">
+            <div class="info-icon">&#127807;</div>
+            <h4>Crops Analyzed</h4>
+            <p>Wheat and Rice — Nepal's two primary staple food crops</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <p>
-      The goal of this project is to demonstrate how a structured system can be built to manage
-      and analyze agricultural datasets. By organizing production data efficiently, users can
-      observe trends and compare productivity between regions.
-    </p>
+    <section class="section bg-alt">
+      <div class="container narrow">
+        <h2 class="section-title">Project Objectives</h2>
+        <p class="section-sub">Demonstrating database design principles with real agricultural data</p>
+        <ol class="objective-list">
+          <li>Design and implement a relational database for crop production data across Nepal provinces.</li>
+          <li>Analyze wheat and rice production trends from 2019 to 2023 across three provinces.</li>
+          <li>Compare agricultural output across Lumbini, Madesh Province, and Sudurpashchim.</li>
+          <li>Calculate and visualize yield efficiency (MT per Hectare) per crop and province.</li>
+          <li>Provide data-driven insights into sustainable land use and agricultural productivity.</li>
+        </ol>
+      </div>
+    </section>
 
-    <p>
-      This system is developed using web technologies along with database concepts, making it
-      a complete full-stack application. It highlights how digital solutions can support
-      agricultural planning and decision-making.
-    </p>
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Provinces Covered</h2>
+        <p class="section-sub">Three provinces selected as major agricultural zones of Nepal</p>
+        <div class="province-cards">
+          <div class="province-card green">
+            <h3>Lumbini Province</h3>
+            <p>Largest wheat-producing province; significant rice output with the highest cultivated wheat area at 515,000 Ha in 2023.</p>
+          </div>
+          <div class="province-card amber">
+            <h3>Madesh Province</h3>
+            <p>Highest rice output and best wheat yield efficiency; Terai lowlands support premium paddy cultivation conditions.</p>
+          </div>
+          <div class="province-card blue">
+            <h3>Sudurpashchim Province</h3>
+            <p>Consistent growth in both crops; shows strong untapped potential despite lower current production volumes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-alt">
+      <div class="container narrow">
+        <h2 class="section-title">Data Source</h2>
+        <div class="text-card">
+          <p class="body-text">
+            The crop production data used in this project is derived from official agricultural
+            statistics of Nepal, covering annual records for wheat and rice across three provinces.
+            Data includes area harvested in hectares (Ha), total production in metric tons (MT),
+            and yield efficiency expressed as MT per Ha. The dataset spans five consecutive years
+            (2019–2023), providing a meaningful time-series for trend analysis.
+          </p>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <!-- LIFE ON LAND -->
-  <div id="life" class="section">
-    <h1>🌱 Life on Land</h1>
+  <!-- PRODUCTION DATA PAGE -->
+  <div id="page-data" class="page">
+    <section class="hero small-hero">
+      <div class="hero-badge">&#128202; Data Analysis</div>
+      <h1>Production Data</h1>
+      <p class="hero-sub">Wheat &amp; Rice across Nepal's three provinces (2019–2023)</p>
+    </section>
 
-    <p>
-      "Life on Land" is one of the United Nations Sustainable Development Goals (SDG 15),
-      which focuses on protecting, restoring, and promoting the sustainable use of terrestrial
-      ecosystems. It aims to address issues such as deforestation, soil degradation, and loss
-      of biodiversity.
-    </p>
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Production Bar Charts</h2>
+        <p class="section-sub">Annual production (MT) and cultivated area (Ha) by province</p>
 
-    <p>
-      Agricultural activities are closely linked to land sustainability. Poor farming practices
-      can lead to soil erosion and environmental damage, while sustainable practices can help
-      preserve natural resources and improve productivity.
-    </p>
+        <div class="charts-grid">
 
-    <p>
-      This system contributes to the Life on Land theme by providing accessible agricultural
-      data that helps users understand the importance of sustainable land use and responsible
-      farming practices.
-    </p>
+          <div class="chart-card">
+            <h3>Wheat Production (Metric Tons)</h3>
+            <p class="chart-sub">Annual wheat output by province, 2019–2023</p>
+            <div class="chart-wrap"><canvas id="chartWheatProd"></canvas></div>
+            <div class="analysis-panel">
+              <p class="analysis-label">Comparison — 2023 values</p>
+              <div class="analysis-items">
+                <div class="analysis-item highest">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Highest — Lumbini</strong>
+                    <span>1,120,000 MT</span>
+                    <p>Largest wheat-growing area in Nepal with consistent year-on-year growth.</p>
+                  </div>
+                </div>
+                <div class="analysis-item middle">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Middle — Madesh Province</strong>
+                    <span>855,000 MT</span>
+                    <p>Strong output despite smaller area due to superior yield efficiency.</p>
+                  </div>
+                </div>
+                <div class="analysis-item lowest">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Lowest — Sudurpashchim</strong>
+                    <span>580,000 MT</span>
+                    <p>Lower production linked to hilly terrain and limited irrigation access.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3>Rice Production (Metric Tons)</h3>
+            <p class="chart-sub">Annual rice output by province, 2019–2023</p>
+            <div class="chart-wrap"><canvas id="chartRiceProd"></canvas></div>
+            <div class="analysis-panel">
+              <p class="analysis-label">Comparison — 2023 values</p>
+              <div class="analysis-items">
+                <div class="analysis-item highest">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Highest — Madesh Province</strong>
+                    <span>1,530,000 MT</span>
+                    <p>Terai lowlands provide ideal paddy conditions, making this the top rice producer.</p>
+                  </div>
+                </div>
+                <div class="analysis-item middle">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Middle — Lumbini</strong>
+                    <span>1,330,000 MT</span>
+                    <p>Second-largest rice producer with steady annual growth across the study period.</p>
+                  </div>
+                </div>
+                <div class="analysis-item lowest">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Lowest — Sudurpashchim</strong>
+                    <span>770,000 MT</span>
+                    <p>Lowest rice output but shows the fastest percentage growth rate (2019–2023).</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3>Wheat Cultivated Area (Hectares)</h3>
+            <p class="chart-sub">Hectares used for wheat cultivation, 2019–2023</p>
+            <div class="chart-wrap"><canvas id="chartWheatArea"></canvas></div>
+            <div class="analysis-panel">
+              <p class="analysis-label">Comparison — 2023 values</p>
+              <div class="analysis-items">
+                <div class="analysis-item highest">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Highest — Lumbini</strong>
+                    <span>515,000 Ha</span>
+                    <p>Dedicates the most land to wheat, reflecting its dominant role in provincial agriculture.</p>
+                  </div>
+                </div>
+                <div class="analysis-item middle">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Middle — Sudurpashchim</strong>
+                    <span>330,000 Ha</span>
+                    <p>Mid-range wheat area but yields remain low, pointing to soil and climate constraints.</p>
+                  </div>
+                </div>
+                <div class="analysis-item lowest">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Lowest — Madesh Province</strong>
+                    <span>260,000 Ha</span>
+                    <p>Smallest wheat area yet achieves the highest yield rate — highly efficient farming.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3>Rice Cultivated Area (Hectares)</h3>
+            <p class="chart-sub">Hectares used for rice cultivation, 2019–2023</p>
+            <div class="chart-wrap"><canvas id="chartRiceArea"></canvas></div>
+            <div class="analysis-panel">
+              <p class="analysis-label">Comparison — 2023 values</p>
+              <div class="analysis-items">
+                <div class="analysis-item highest">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Highest — Madesh Province</strong>
+                    <span>360,000 Ha</span>
+                    <p>Largest rice farming footprint, supported by flat terrain and abundant water resources.</p>
+                  </div>
+                </div>
+                <div class="analysis-item middle">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Middle — Lumbini</strong>
+                    <span>315,000 Ha</span>
+                    <p>Significant rice cultivation area with good yield, contributing to provincial food supply.</p>
+                  </div>
+                </div>
+                <div class="analysis-item lowest">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Lowest — Sudurpashchim</strong>
+                    <span>189,000 Ha</span>
+                    <p>Smallest cultivated rice area, though yield per hectare remains competitive at 4.05 MT/Ha.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="chart-card full-width">
+          <h3>Yield Efficiency Comparison — 2023 (MT per Hectare)</h3>
+          <p class="chart-sub">Comparing wheat vs rice yield efficiency per province in 2023</p>
+          <div class="chart-wrap"><canvas id="chartYield"></canvas></div>
+          <div class="analysis-panel">
+            <p class="analysis-label">Yield Breakdown — 2023</p>
+            <div class="yield-cols">
+              <div class="yield-col">
+                <p class="yield-col-title">Wheat Yield (MT/Ha)</p>
+                <div class="analysis-item highest">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Highest — Madesh Province</strong>
+                    <span>3.29 MT/Ha</span>
+                    <p>Best wheat yield — high soil fertility and efficient farming practices.</p>
+                  </div>
+                </div>
+                <div class="analysis-item middle">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Middle — Lumbini</strong>
+                    <span>2.17 MT/Ha</span>
+                    <p>Moderate wheat yield with the largest cultivated area in Nepal.</p>
+                  </div>
+                </div>
+                <div class="analysis-item lowest">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Lowest — Sudurpashchim</strong>
+                    <span>1.75 MT/Ha</span>
+                    <p>Lowest wheat yield, reflecting terrain and input supply challenges.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="yield-col">
+                <p class="yield-col-title">Rice Yield (MT/Ha)</p>
+                <div class="analysis-item highest">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Highest — Madesh Province</strong>
+                    <span>4.25 MT/Ha</span>
+                    <p>Top rice yield — optimal lowland conditions for paddy cultivation.</p>
+                  </div>
+                </div>
+                <div class="analysis-item middle">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Middle — Lumbini</strong>
+                    <span>4.22 MT/Ha</span>
+                    <p>Very close to Madesh — strong rice farming practices province-wide.</p>
+                  </div>
+                </div>
+                <div class="analysis-item lowest">
+                  <span class="rank-dot"></span>
+                  <div>
+                    <strong>Lowest — Sudurpashchim</strong>
+                    <span>4.05 MT/Ha</span>
+                    <p>Still competitive — rice yield is notably uniform across all three provinces.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section bg-alt">
+      <div class="container">
+        <h2 class="section-title">Raw Data Table</h2>
+        <div class="tab-btns">
+          <button class="tab-btn active" onclick="switchTable('wheat', this)">Wheat</button>
+          <button class="tab-btn" onclick="switchTable('rice', this)">Rice</button>
+        </div>
+        <div class="table-wrap">
+          <table id="dataTable">
+            <thead>
+              <tr>
+                <th>Crop</th><th>Year</th><th>Province</th>
+                <th>Area (Ha)</th><th>Production (MT)</th><th>Yield (MT/Ha)</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <!-- DATA -->
-  <div id="data" class="section">
-    <h1>📊 Production Data</h1>
+  <!-- CONCLUSION PAGE -->
+  <div id="page-conclusion" class="page">
+    <section class="hero small-hero">
+      <div class="hero-badge">&#128221; Final Summary</div>
+      <h1>Conclusion</h1>
+      <p class="hero-sub">Key findings, insights, and recommendations from DBSN-S2026</p>
+    </section>
 
-    <p>
-      This section provides detailed crop production data for wheat and rice across different
-      provinces and years. It includes important metrics such as cultivated area, total production,
-      and yield per hectare.
-    </p>
+    <section class="section">
+      <div class="container narrow">
+        <h2 class="section-title">Project Summary</h2>
+        <p class="body-text">
+          The DBSN-S2026 project successfully applied database design principles to model, store,
+          and analyze five years of wheat and rice crop production data from three provinces of Nepal:
+          Lumbini, Madesh Province, and Sudurpashchim. Using a structured relational schema, the data
+          was organized into logical entities — crops, provinces, and production records — enabling
+          efficient querying, aggregation, and visualization.
+        </p>
+        <p class="body-text">
+          The analysis demonstrated how database-driven approaches can transform raw agricultural data
+          into actionable insights. Bar chart visualizations revealed clear trends in production volumes,
+          harvested areas, and yield efficiencies, providing a strong foundation for evidence-based
+          agricultural decision-making.
+        </p>
+      </div>
+    </section>
 
-    <p>
-      By analyzing this data, users can compare agricultural performance across regions and identify
-      patterns in crop productivity. This information is essential for improving agricultural
-      practices and ensuring efficient use of land resources.
-    </p>
+    <section class="section bg-alt">
+      <div class="container narrow">
+        <h2 class="section-title">Key Findings</h2>
+        <p class="section-sub">Insights from the five-year crop production analysis</p>
+        <div class="findings-list">
+          <div class="finding-item">
+            <div class="finding-num">1</div>
+            <div>
+              <h4>Consistent Growth Across All Provinces</h4>
+              <p>Both wheat and rice production showed steady year-on-year increases from 2019 to 2023 across all three provinces, demonstrating improved agricultural productivity throughout Nepal.</p>
+            </div>
+          </div>
+          <div class="finding-item">
+            <div class="finding-num">2</div>
+            <div>
+              <h4>Lumbini Leads in Wheat Production</h4>
+              <p>Lumbini Province consistently produced the highest wheat output, reaching 1,120,000 MT in 2023 — the largest cultivated area of 515,000 Ha among all three provinces.</p>
+            </div>
+          </div>
+          <div class="finding-item">
+            <div class="finding-num">3</div>
+            <div>
+              <h4>Madesh Province Dominates Rice Output</h4>
+              <p>Madesh Province had the highest rice production, peaking at 1,530,000 MT in 2023, benefiting from favorable lowland ecology and extensive paddy cultivation.</p>
+            </div>
+          </div>
+          <div class="finding-item">
+            <div class="finding-num">4</div>
+            <div>
+              <h4>Madesh Has the Best Wheat Yield Efficiency</h4>
+              <p>Despite having the smallest wheat cultivation area, Madesh Province achieved the highest yield of 3.29 MT/Ha, indicating superior crop management and soil conditions.</p>
+            </div>
+          </div>
+          <div class="finding-item">
+            <div class="finding-num">5</div>
+            <div>
+              <h4>Rice Yields Are Comparable Across Provinces</h4>
+              <p>Rice yield efficiency (4.05–4.25 MT/Ha) was notably uniform across all provinces, suggesting that rice is well-adapted to Nepal's diverse agro-climatic conditions.</p>
+            </div>
+          </div>
+          <div class="finding-item">
+            <div class="finding-num">6</div>
+            <div>
+              <h4>Sudurpashchim Shows Steady Growth Potential</h4>
+              <p>Though currently having the lowest output, Sudurpashchim exhibited consistent upward trends in both wheat and rice, indicating significant untapped agricultural potential.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <button onclick="loadData()">Load Data</button>
+    <section class="section">
+      <div class="container narrow">
+        <h2 class="section-title">Recommendations</h2>
+        <ol class="recommendation-list">
+          <li>Invest in irrigation infrastructure in Sudurpashchim Province to boost yield efficiency and expand cultivated area for both wheat and rice.</li>
+          <li>Replicate Madesh Province's wheat farming practices — particularly seed selection and soil management — in provinces with lower yield rates.</li>
+          <li>Leverage database-driven monitoring systems to track seasonal crop performance in real-time across all provinces.</li>
+          <li>Promote crop diversification alongside wheat and rice to reduce dependency on two crops and improve long-term soil health.</li>
+          <li>Develop provincial agricultural policies informed by yield trend analysis to better meet Nepal's growing food demand.</li>
+        </ol>
+      </div>
+    </section>
 
-    <div id="output"></div>
+    <section class="section bg-alt">
+      <div class="container narrow">
+        <h2 class="section-title">Closing Remarks</h2>
+        <div class="text-card">
+          <p class="body-text">
+            This project illustrates the power of structured data management in understanding
+            agricultural trends. The relational database model proved effective in organizing
+            and querying multi-dimensional crop data across time and geography.
+          </p>
+          <p class="body-text">
+            The upward production trends observed from 2019 to 2023 are encouraging signs of
+            agricultural resilience in Nepal. However, disparities in yield efficiency between
+            provinces highlight the need for targeted interventions and knowledge transfer.
+          </p>
+          <p class="body-text">
+            With proper data infrastructure and continued monitoring, Nepal's agricultural sector
+            has strong potential to improve food security, land-use efficiency, and rural livelihoods
+            — directly contributing to sustainable life on land.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-banner">
+      <div class="container">
+        <h3>DBSN-S2026 &mdash; Database Design Project</h3>
+        <p>Life on Land: Crop Production Analysis in Nepal (2019–2023)</p>
+        <div class="footer-tags">
+          <span>Crops: Wheat &amp; Rice</span>
+          <span>Provinces: Lumbini, Madesh, Sudurpashchim</span>
+          <span>Years: 2019–2023</span>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <!-- CONCLUSION -->
-  <div id="conclusion" class="section">
-    <h1>📘 Conclusion</h1>
-
-    <p>
-      This project demonstrates how agricultural data can be effectively managed and analyzed using
-      modern technology. By integrating data visualization with structured information, the system
-      provides valuable insights into crop production.
-    </p>
-
-    <p>
-      The analysis of crop production trends helps in understanding regional differences and supports
-      better planning for sustainable agriculture. It highlights the importance of data-driven
-      decision-making in enhancing productivity and protecting land resources.
-    </p>
-
-    <p>
-      Overall, the system aligns with the Life on Land theme by promoting awareness about sustainable
-      land use and the role of agriculture in environmental conservation.
-    </p>
-  </div>
-
-</div>
+  <footer class="main-footer">
+    <p>DBSN-S2026 &mdash; Database Design Project &mdash; Life on Land</p>
+    <p>Crop Production Analysis: Nepal Provinces (2019&ndash;2023)</p>
+  </footer>
 
 <script>
+  const rawData = [
+    {crop:"Wheat",year:2019,province:"Lumbini",area:496000,production:1049000,yield:2.11},
+    {crop:"Wheat",year:2020,province:"Lumbini",area:500000,production:1060000,yield:2.12},
+    {crop:"Wheat",year:2021,province:"Lumbini",area:505000,production:1080000,yield:2.14},
+    {crop:"Wheat",year:2022,province:"Lumbini",area:510000,production:1100000,yield:2.16},
+    {crop:"Wheat",year:2023,province:"Lumbini",area:515000,production:1120000,yield:2.17},
+    {crop:"Wheat",year:2019,province:"Madesh Province",area:240000,production:800000,yield:3.30},
+    {crop:"Wheat",year:2020,province:"Madesh Province",area:245000,production:810000,yield:3.31},
+    {crop:"Wheat",year:2021,province:"Madesh Province",area:250000,production:825000,yield:3.30},
+    {crop:"Wheat",year:2022,province:"Madesh Province",area:255000,production:840000,yield:3.29},
+    {crop:"Wheat",year:2023,province:"Madesh Province",area:260000,production:855000,yield:3.29},
+    {crop:"Wheat",year:2019,province:"Sudurpashchim",area:320000,production:547000,yield:1.71},
+    {crop:"Wheat",year:2020,province:"Sudurpashchim",area:322000,production:550000,yield:1.71},
+    {crop:"Wheat",year:2021,province:"Sudurpashchim",area:325000,production:560000,yield:1.72},
+    {crop:"Wheat",year:2022,province:"Sudurpashchim",area:328000,production:570000,yield:1.73},
+    {crop:"Wheat",year:2023,province:"Sudurpashchim",area:330000,production:580000,yield:1.75},
+    {crop:"Rice",year:2019,province:"Lumbini",area:305000,production:1250000,yield:4.10},
+    {crop:"Rice",year:2020,province:"Lumbini",area:308000,production:1275000,yield:4.14},
+    {crop:"Rice",year:2021,province:"Lumbini",area:310000,production:1290000,yield:4.16},
+    {crop:"Rice",year:2022,province:"Lumbini",area:312000,production:1310000,yield:4.20},
+    {crop:"Rice",year:2023,province:"Lumbini",area:315000,production:1330000,yield:4.22},
+    {crop:"Rice",year:2019,province:"Madesh Province",area:350000,production:1450000,yield:4.14},
+    {crop:"Rice",year:2020,province:"Madesh Province",area:353000,production:1470000,yield:4.16},
+    {crop:"Rice",year:2021,province:"Madesh Province",area:355000,production:1490000,yield:4.20},
+    {crop:"Rice",year:2022,province:"Madesh Province",area:358000,production:1510000,yield:4.22},
+    {crop:"Rice",year:2023,province:"Madesh Province",area:360000,production:1530000,yield:4.25},
+    {crop:"Rice",year:2019,province:"Sudurpashchim",area:180000,production:720000,yield:4.00},
+    {crop:"Rice",year:2020,province:"Sudurpashchim",area:182000,production:730000,yield:4.01},
+    {crop:"Rice",year:2021,province:"Sudurpashchim",area:185000,production:742000,yield:4.01},
+    {crop:"Rice",year:2022,province:"Sudurpashchim",area:188000,production:755000,yield:4.02},
+    {crop:"Rice",year:2023,province:"Sudurpashchim",area:189000,production:770000,yield:4.05},
+  ];
 
-  function show(id, el){
-    document.querySelectorAll(".section").forEach(sec => sec.style.display="none");
-    document.querySelectorAll(".sidebar div").forEach(d=>d.classList.remove("active"));
+  const years = ["2019","2020","2021","2022","2023"];
+  const C = { lumbini:"#2d7a3d", madesh:"#d97706", sudur:"#0e7490" };
 
-    document.getElementById(id).style.display="block";
-    el.classList.add("active");
+  function getByProvince(crop, field) {
+    return {
+      lumbini: years.map(y => rawData.find(r => r.crop===crop && r.year===+y && r.province==="Lumbini")[field]),
+      madesh:  years.map(y => rawData.find(r => r.crop===crop && r.year===+y && r.province==="Madesh Province")[field]),
+      sudur:   years.map(y => rawData.find(r => r.crop===crop && r.year===+y && r.province==="Sudurpashchim")[field]),
+    };
   }
 
-  function loadData(){
-
-  let table = `
-  <table>
-  <tr>
-  <th>Crop</th>
-  <th>Province</th>
-  <th>Year</th>
-  <th>Area (Ha)</th>
-  <th>Production (MT)</th>
-  <th>Yield (MT/Ha)</th>
-  </tr>
-
-  <tr><td>Wheat</td><td>Lumbini</td><td>2019</td><td>496000</td><td>1049000</td><td>2.11</td></tr>
-  <tr><td>Wheat</td><td>Lumbini</td><td>2020</td><td>500000</td><td>1060000</td><td>2.12</td></tr>
-  <tr><td>Wheat</td><td>Lumbini</td><td>2021</td><td>505000</td><td>1080000</td><td>2.14</td></tr>
-  <tr><td>Wheat</td><td>Lumbini</td><td>2022</td><td>510000</td><td>1100000</td><td>2.16</td></tr>
-  <tr><td>Wheat</td><td>Lumbini</td><td>2023</td><td>515000</td><td>1120000</td><td>2.17</td></tr>
-
-  <tr><td>Wheat</td><td>Madesh Province</td><td>2019</td><td>240000</td><td>800000</td><td>3.3</td></tr>
-  <tr><td>Wheat</td><td>Madesh Province</td><td>2020</td><td>245000</td><td>810000</td><td>3.31</td></tr>
-  <tr><td>Wheat</td><td>Madesh Province</td><td>2021</td><td>250000</td><td>825000</td><td>3.3</td></tr>
-  <tr><td>Wheat</td><td>Madesh Province</td><td>2022</td><td>255000</td><td>840000</td><td>3.29</td></tr>
-  <tr><td>Wheat</td><td>Madesh Province</td><td>2023</td><td>260000</td><td>855000</td><td>3.29</td></tr>
-
-  <tr><td>Wheat</td><td>Sudurpashchim</td><td>2019</td><td>320000</td><td>547000</td><td>1.71</td></tr>
-  <tr><td>Wheat</td><td>Sudurpashchim</td><td>2020</td><td>322000</td><td>550000</td><td>1.71</td></tr>
-  <tr><td>Wheat</td><td>Sudurpashchim</td><td>2021</td><td>325000</td><td>560000</td><td>1.72</td></tr>
-  <tr><td>Wheat</td><td>Sudurpashchim</td><td>2022</td><td>328000</td><td>570000</td><td>1.73</td></tr>
-  <tr><td>Wheat</td><td>Sudurpashchim</td><td>2023</td><td>330000</td><td>580000</td><td>1.75</td></tr>
-
-  <tr><td>Rice</td><td>Lumbini</td><td>2019</td><td>305000</td><td>1250000</td><td>4.1</td></tr>
-  <tr><td>Rice</td><td>Lumbini</td><td>2020</td><td>308000</td><td>1275000</td><td>4.14</td></tr>
-  <tr><td>Rice</td><td>Lumbini</td><td>2021</td><td>310000</td><td>1290000</td><td>4.16</td></tr>
-  <tr><td>Rice</td><td>Lumbini</td><td>2022</td><td>312000</td><td>1310000</td><td>4.2</td></tr>
-  <tr><td>Rice</td><td>Lumbini</td><td>2023</td><td>315000</td><td>1330000</td><td>4.22</td></tr>
-
-  <tr><td>Rice</td><td>Madesh Province</td><td>2019</td><td>350000</td><td>1450000</td><td>4.14</td></tr>
-  <tr><td>Rice</td><td>Madesh Province</td><td>2020</td><td>353000</td><td>1470000</td><td>4.16</td></tr>
-  <tr><td>Rice</td><td>Madesh Province</td><td>2021</td><td>355000</td><td>1490000</td><td>4.2</td></tr>
-  <tr><td>Rice</td><td>Madesh Province</td><td>2022</td><td>358000</td><td>1510000</td><td>4.22</td></tr>
-  <tr><td>Rice</td><td>Madesh Province</td><td>2023</td><td>360000</td><td>1530000</td><td>4.25</td></tr>
-
-  <tr><td>Rice</td><td>Sudurpashchim</td><td>2019</td><td>180000</td><td>720000</td><td>4</td></tr>
-  <tr><td>Rice</td><td>Sudurpashchim</td><td>2020</td><td>182000</td><td>730000</td><td>4.01</td></tr>
-  <tr><td>Rice</td><td>Sudurpashchim</td><td>2021</td><td>185000</td><td>742000</td><td>4.01</td></tr>
-  <tr><td>Rice</td><td>Sudurpashchim</td><td>2022</td><td>188000</td><td>755000</td><td>4.02</td></tr>
-  <tr><td>Rice</td><td>Sudurpashchim</td><td>2023</td><td>189000</td><td>770000</td><td>4.05</td></tr>
-
-  </table>
-  `;
-
-  document.getElementById("output").innerHTML = table;
+  function makeChart(id, crop, field, label) {
+    const d = getByProvince(crop, field);
+    new Chart(document.getElementById(id), {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          { label:"Lumbini",          data: d.lumbini, backgroundColor: C.lumbini, borderRadius: 4 },
+          { label:"Madesh Province",  data: d.madesh,  backgroundColor: C.madesh,  borderRadius: 4 },
+          { label:"Sudurpashchim",    data: d.sudur,   backgroundColor: C.sudur,   borderRadius: 4 },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position:"bottom" } },
+        scales: {
+          y: { ticks: { callback: v => label==="MT" ? (v/1000000).toFixed(1)+"M" : (v/1000).toFixed(0)+"K" } }
+        }
+      }
+    });
   }
 
-  window.onload = function(){
-    document.getElementById("home").style.display="block";
+  function makeYieldChart() {
+    new Chart(document.getElementById("chartYield"), {
+      type:"bar",
+      data:{
+        labels:["Lumbini","Madesh Province","Sudurpashchim"],
+        datasets:[
+          { label:"Wheat",backgroundColor:C.lumbini,borderRadius:4, data:[2.17,3.29,1.75] },
+          { label:"Rice", backgroundColor:C.madesh, borderRadius:4, data:[4.22,4.25,4.05] },
+        ]
+      },
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{position:"bottom"}},
+        scales:{ y:{ beginAtZero:true, title:{display:true,text:"MT / Ha"} } }
+      }
+    });
   }
 
+  function initCharts() {
+    makeChart("chartWheatProd", "Wheat", "production", "MT");
+    makeChart("chartRiceProd",  "Rice",  "production", "MT");
+    makeChart("chartWheatArea", "Wheat", "area",       "Ha");
+    makeChart("chartRiceArea",  "Rice",  "area",       "Ha");
+    makeYieldChart();
+  }
+
+  let chartsInit = false;
+  let currentTable = "wheat";
+
+  function renderTable(crop) {
+    const tbody = document.getElementById("tableBody");
+    const rows = rawData.filter(r => r.crop.toLowerCase() === crop);
+    tbody.innerHTML = rows.map((r,i) =>
+      `<tr class="${i%2===0?'':'alt-row'}">
+        <td>${r.crop}</td><td>${r.year}</td><td>${r.province}</td>
+        <td>${r.area.toLocaleString()}</td><td>${r.production.toLocaleString()}</td>
+        <td>${r.yield.toFixed(2)}</td>
+      </tr>`
+    ).join("");
+  }
+
+  function switchTable(crop, btn) {
+    currentTable = crop;
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    renderTable(crop);
+  }
+
+  function showPage(id, clickedLink) {
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById("page-" + id).classList.add("active");
+    document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
+    if (clickedLink) clickedLink.classList.add("active");
+    window.scrollTo(0,0);
+    if (id === "data" && !chartsInit) {
+      chartsInit = true;
+      setTimeout(initCharts, 50);
+      renderTable("wheat");
+    }
+  }
+
+  function toggleMenu() {
+    document.getElementById("mobileMenu").classList.toggle("open");
+  }
 </script>
-
 </body>
 </html>
